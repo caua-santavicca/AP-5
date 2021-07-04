@@ -3,7 +3,6 @@ from os import environ
 from asyncio import sleep
 # from keep_alive import keep_alive
 import functions
-
 # import coreapi_cli
 
 client = discord.Client()

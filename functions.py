@@ -1,6 +1,6 @@
 from subprocess import Popen, PIPE
 from json import load, decoder, dump
-# import coreapi
+import coreapi
 
 mod_primary = {'health': 55,
                'offence': 48,
