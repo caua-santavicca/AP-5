@@ -1,16 +1,10 @@
 import discord
 from asyncio import sleep
-<<<<<<< HEAD
 from keep_alive import keep_alive
 from modules.utils import unpickle, bkp, restore
 from modules.player import Player
 from modules.guild import Guild
 from json.decoder import JSONDecodeError
-=======
-# from keep_alive import keep_alive
-import functions
-# import coreapi_cli
->>>>>>> main
 
 client = discord.Client()
 users: dict = {}
