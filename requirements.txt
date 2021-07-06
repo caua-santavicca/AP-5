@@ -1,4 +1,5 @@
 discord.py==1.5.1
 discord==1.0.1
+coreapi-cli
 coreapi
 flask==2.0.1
