@@ -1,3 +1,4 @@
+import codecs
 from subprocess import Popen, PIPE
 from json import load
 from typing import List
@@ -30,7 +31,7 @@ def get_id(ally: str) -> int:
             process = Popen(player.split(), stdout=PIPE)
             output, error = process.communicate()
             with open('data/player' + f'{str(ally)}.json', "w+") as player:
-                player.write(str(output.decode('utf-8')))
+                player.write(str(codecs.decode(output, 'utf-8-sig')))
 
     with open('data/player' + f'{str(ally)}.json', 'r') as ply:
         player = load(ply)

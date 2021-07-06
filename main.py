@@ -1,7 +1,8 @@
 import discord
+import os
 from asyncio import sleep
 from keep_alive import keep_alive
-from modules.utils import unpickle, bkp, restore
+from modules.utils import bkp, restore
 from modules.player import Player
 from modules.guild import Guild
 from json.decoder import JSONDecodeError
@@ -1079,6 +1080,7 @@ To se the complete list os values visit AP-5 discord server:
 
 
 users.update(restore())
-token = unpickle()
+# token = unpickle()
 keep_alive()
-client.run(token)
+TOKEN = os.getenv("DISCORD_TOKEN")  # to run bot on heroku
+client.run(TOKEN)
