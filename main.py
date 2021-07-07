@@ -1078,7 +1078,7 @@ To se the complete list os values visit AP-5 discord server:
                 bkp(users)
 
 
-users.update(restore())
+# users.update(restore())
 # TOKEN = unpickle() # to run on local with token on a pickle file
 TOKEN = os.getenv("DISCORD_TOKEN")
 client.run(TOKEN)
