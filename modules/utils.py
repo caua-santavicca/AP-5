@@ -1,5 +1,8 @@
+import os
 from pickle import load as pik
-from json import dumps, load
+from sqlalchemy import create_engine
+from pandas import DataFrame
+import psycopg2
 
 
 def unpickle():
@@ -10,12 +13,16 @@ def unpickle():
 
 
 def bkp(backup: dict) -> None:
-    with open('data/backup.json', 'w+') as back_up:
-        bcp = dumps(backup, indent=4)
-        back_up.write(bcp)
+    engine = create_engine(os.environ.get('DATABASE_URL'), echo=False)
+    df = DataFrame(data=backup)
+    df.to_sql('registry', con=engine, if_exists='append')
 
 
 def restore() -> dict:
-    with open('data/backup.json', 'r') as backup:
-        register = load(backup)
-    return register
+    DATABASE_URL = os.environ.get('DATABASE_URL')
+    con = psycopg2.connect(DATABASE_URL)
+    cur = con.cursor()
+    cur.execute('select * from cidade')
+    recset = cur.fetchall()
+    con.close()
+    return recset
