@@ -1049,7 +1049,7 @@ To se the complete list os values visit AP-5 discord server:
                 await bot.delete()
 
     if message.content.startswith('$r '):
-        users.update(restore())
+        # users.update(restore())
         register = message.content.split()
         if len(register[0]) == 2:
             emoji = '🤔'
