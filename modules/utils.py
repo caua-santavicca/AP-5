@@ -13,7 +13,11 @@ def unpickle():
 
 
 def bkp(backup: dict) -> None:
-    engine = create_engine(os.environ.get('DATABASE_URL'), echo=False)
+    uri = os.getenv("DATABASE_URL")  # or other relevant config var
+    if uri.startswith("postgres://"):
+        uri = uri.replace("postgres://", "postgresql://", 1)
+
+    engine = create_engine(uri, echo=False)
     df = DataFrame(data=backup)
     df.to_sql('registry', con=engine, if_exists='append')
 
