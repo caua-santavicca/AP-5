@@ -22,7 +22,7 @@ def restore() -> dict:
     DATABASE_URL = os.environ.get('DATABASE_URL')
     con = psycopg2.connect(DATABASE_URL)
     cur = con.cursor()
-    cur.execute('select * from cidade')
+    cur.execute('select * from registry')
     recset = cur.fetchall()
     con.close()
     return recset
