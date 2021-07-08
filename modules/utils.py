@@ -29,7 +29,10 @@ def restore() -> dict:
     cur = con.cursor()
     cur.execute('select * from registry')
     recset = cur.fetchall()
-    ally = recset[0][2].removeprefix('{').removesuffix('}')
-    dict = {recset[0][1]: ally.split(',')}
+    registry = {}
+    for i in recset:
+        ally = i[0][2].removeprefix('{').removesuffix('}')
+        dict = {i[0][1]: ally.split(',')}
+        registry.update(dict)
     con.close()
-    return dict
+    return registry
