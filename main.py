@@ -7,7 +7,6 @@ from modules.guild import Guild
 from json.decoder import JSONDecodeError
 
 client = discord.Client()
-users: dict = {}
 
 
 @client.event
@@ -59,7 +58,7 @@ Use _$help mq_ to se how the mod quality is calculated
 
             except IndexError:
 
-                users.update(restore())
+                users = restore()
                 if str(message.author) in users:
                     for i in range(len(users[str(message.author)])):
                         player_dt = Player(users[str(message.author)][i])
@@ -153,7 +152,7 @@ Mods <10: {len([k for k in player_dt.mods if 9 <= k.speed and k.primary == i])}
                                       'Critical Damage',
                                       'Critical Avoidance', 'Tenacity', 'Potency', 'Speed']
 
-                users.update(restore())
+                users = restore()
                 if str(message.author) in users:
                     for k in range(len(users[str(message.author)])):
                         player_dt = Player(users[str(message.author)][k])
@@ -205,7 +204,7 @@ Mods <10: {len([k for k in player_dt.mods if 9 <= k.speed and k.primary == i])}
         allycode = message.content.split()
         if len(allycode[0]) == 4:
 
-            users.update(restore())
+            users = restore()
             emoji = '🤔'
             await message.add_reaction(emoji)
             bot = await message.channel.send('One moment....')
@@ -463,7 +462,7 @@ Mods <10: {len([i for i in player_dt.mods if 9 <= i.speed and i.mod_set == k])}
                 embed.clear_fields()
 
             except IndexError:
-                users.update(restore())
+                users = restore()
                 if str(message.author) in users:
                     for i in range(len(users[str(message.author)])):
                         player_dt = Player(users[str(message.author)][i])
@@ -507,7 +506,7 @@ Mods <10: {len([i for i in player_dt.mods if 9 <= i.speed and i.mod_set == k])}
         allycode = message.content.split()
         if len(allycode[0]) == 4:
 
-            users.update(restore())
+            users = restore()
             emoji = '🤔'
             await message.add_reaction(emoji)
             bot = await message.channel.send('One moment....')
@@ -626,7 +625,7 @@ Mods <10: {len([i for i in player_dt.mods if 9 <= i.speed and i.mod_set == allyc
         allycode = message.content.split()
         if len(allycode[0]) == 4:
 
-            users.update(restore())
+            users = restore()
             emoji = '🤔'
             await message.add_reaction(emoji)
             bot = await message.channel.send('One moment....')
@@ -699,7 +698,7 @@ Mods <10: {len([i for i in player_dt.mods if 9 <= i.speed and i.slot == k])}
         allycode = message.content.split()
         if len(allycode[0]) == 5:
 
-            users.update(restore())
+            users = restore()
             emoji = '🤔'
             await message.add_reaction(emoji)
             bot = await message.channel.send('One moment....')
@@ -936,7 +935,7 @@ To se the complete list os values visit AP-5 discord server:
 
         guild = message.content.split()
         if len(guild[0]) == 3:
-            users.update(restore())
+            users = restore()
 
             emoji = '🤔'
             await message.add_reaction(emoji)
@@ -1072,10 +1071,9 @@ To se the complete list os values visit AP-5 discord server:
                 await message.channel.send('Ally code not recognised')
 
             else:
-                reg = {str(message.author): ally}
-                users.update(reg)
+                reg = [str(message.author), ally]
                 await message.channel.send(str(message.author.mention) + f'ally code {ally} registered')
-                bkp(users)
+                bkp(reg)
 
 
 # users.update(restore())

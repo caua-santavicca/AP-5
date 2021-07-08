@@ -12,13 +12,14 @@ def unpickle():
     return token
 
 
-def bkp(backup: dict) -> None:
+def bkp(backup: list) -> None:
     uri = os.getenv("DATABASE_URL")  # or other relevant config var
     if uri.startswith("postgres://"):
         uri = uri.replace("postgres://", "postgresql://", 1)
 
     engine = create_engine(uri, echo=False)
-    df = DataFrame(data=backup)
+    d = {'discord_id': [backup[0]], 'ally': [backup[1]]}
+    df = DataFrame(data=d)
     df.to_sql('registry', con=engine, if_exists='append')
 
 
